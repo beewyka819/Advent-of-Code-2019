@@ -8,20 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         List<Integer> modules = new ArrayList<Integer>();
-
-        try(InputStream in = Main.class.getResourceAsStream("/res/modules.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-                String line;
-                while((line = reader.readLine()) != null) {
-                    modules.add(Integer.parseInt(line));
-                }
-                reader.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
+        
+        InputStream in = Main.class.getResourceAsStream("/res/modules.txt");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        String line;
+        while((line = reader.readLine()) != null) {
+            modules.add(Integer.parseInt(line));
         }
+        reader.close();
 
         int sum = 0;
         for(int module : modules) {
