@@ -50,7 +50,6 @@ public class Main {
                 System.err.println("Couldn't find value");
             } else {
                 System.out.println("Pos 1 = " + valOne + "\nPos 2 = " + valTwo);
-                System.out.println("Test: " + runCalc(valOne, valTwo));
             }
         } catch(Exception excp) {
             excp.printStackTrace();
@@ -75,24 +74,6 @@ public class Main {
                 copy[copy[i + 3]] = copy[copy[i + 1]] * copy[copy[i + 2]];
             } else {
                 System.err.println("[ERROR] Bad opcode");
-            }
-        }
-        return -1;
-    }
-
-    private static int runCalc(int valOne, int valTwo) throws Exception {
-        opcodes[1] = valOne;
-        opcodes[2] = valTwo;
-        for(int i = 0; i < opcodes.length - 3; i += 4) {
-            int action = opcodes[i];
-            if(action == HALT) {
-                return opcodes[0];
-            } else if(action == ADD) {
-                opcodes[opcodes[i + 3]] = opcodes[opcodes[i + 1]] + opcodes[opcodes[i + 2]];
-            } else if(action == MULTIPLY) {
-                opcodes[opcodes[i + 3]] = opcodes[opcodes[i + 1]] * opcodes[opcodes[i + 2]];
-            } else {
-                throw new RuntimeException("[ERROR] Unknown opcode");
             }
         }
         return -1;
