@@ -16,7 +16,6 @@ public class Main {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
                     StringBuilder code = new StringBuilder();
 
-
                     String line;
                     while((line = reader.readLine()) != null) {
                         code.append(line);
