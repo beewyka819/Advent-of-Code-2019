@@ -12,45 +12,45 @@ public class Main {
     private static int[] opcodes;
 
     public static void main(String[] args) {
-        try {
-            StringBuilder code = new StringBuilder();
-            InputStream in = Main.class.getResourceAsStream("/res/code.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while((line = reader.readLine()) != null) {
-                code.append(line);
-            }
-            reader.close();
-            
-            String[] opString = code.toString().split(",");
-            
-            opcodes = new int[opString.length];
-            for(int i = 0; i < opcodes.length; i++) {
-                opcodes[i] = Integer.parseInt(opString[i]);
-            }
+        try(InputStream in = Main.class.getResourceAsStream("/res/code.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+                    StringBuilder code = new StringBuilder();
 
-            int value = 0;
-            int valOne = 0;
-            int valTwo = 0;
 
-            for(int x = 0; x < 100; x++) {
-                for(int y = 0; y < 100; y++) {
-                    valTwo = y;
-                    value = run(x, y);
-                    if(value == 19690720) {
-                        break;
+                    String line;
+                    while((line = reader.readLine()) != null) {
+                        code.append(line);
                     }
-                }
-                valOne = x;
-                if(value == 19690720) {
-                    break;
-                }
-            }
-            if(value != 19690720) {
-                System.err.println("Couldn't find value");
-            } else {
-                System.out.println("Pos 1 = " + valOne + "\nPos 2 = " + valTwo);
-            }
+
+                    String[] opString = code.toString().split(",");
+
+                    opcodes = new int[opString.length];
+                    for(int i = 0; i < opcodes.length; i++) {
+                        opcodes[i] = Integer.parseInt(opString[i]);
+                    }
+
+                    int value = 0;
+                    int valOne = 0;
+                    int valTwo = 0;
+
+                    for(int x = 0; x < 100; x++) {
+                        for(int y = 0; y < 100; y++) {
+                            valTwo = y;
+                            value = run(x, y);
+                            if(value == 19690720) {
+                                break;
+                            }
+                        }
+                        valOne = x;
+                        if(value == 19690720) {
+                            break;
+                        }
+                    }
+                    if(value != 19690720) {
+                        System.err.println("Couldn't find value");
+                    } else {
+                        System.out.println("Pos 1 = " + valOne + "\nPos 2 = " + valTwo);
+                    }
         } catch(Exception excp) {
             excp.printStackTrace();
             System.exit(-1);
